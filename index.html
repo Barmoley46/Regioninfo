@@ -212,39 +212,57 @@
     const totalSpan = document.getElementById('totalCount');
     const visibleSpan = document.getElementById('visibleCount');
 
-    function renderRegionList(filterText = "") {
-        const filtered = regionNames.filter(r => r.toLowerCase().includes(filterText.toLowerCase()));
-        visibleSpan.innerText = filtered.length;
-        regionListDiv.innerHTML = "";
-        
-        if (filtered.length === 0) {
-            regionListDiv.innerHTML = '<div class="no-results">❌ Регион не найден</div>';
-            return;
-        }
-        
-        filtered.forEach(regionName => {
-            const div = document.createElement('div');
-            div.className = "region-list-item";
-            div.innerHTML = `<span class="region-name">${regionName}</span>`;
-            
-            div.onclick = (function(name) {
-                return function() {
-                    const coords = getCoords(name);
-                    map.setView(coords, 6);
-                    const temp = L.marker(coords).addTo(map);
-                    const fileName = getFileName(name);
-                    const fullPath = REGIONS_FOLDER + fileName;
-                    console.log('Открываю файл:', fullPath);
-                    temp.bindPopup(`<div style="text-align:center"><strong>${name}</strong><br><button class="region-button" onclick="window.location.href='${fullPath}'">🌍 Перейти на сайт региона</button></div>`).openPopup();
-                    setTimeout(() => map.removeLayer(temp), 4000);
-                    document.querySelectorAll('.region-list-item').forEach(el => el.classList.remove('active'));
-                    div.classList.add('active');
-                };
-            })(regionName);
-            
-            regionListDiv.appendChild(div);
-        });
+   function renderRegionList(filterText = "") {
+    const filtered = regionNames.filter(r => r.toLowerCase().includes(filterText.toLowerCase()));
+    visibleSpan.innerText = filtered.length;
+    regionListDiv.innerHTML = "";
+    
+    if (filtered.length === 0) {
+        regionListDiv.innerHTML = '<div class="no-results">❌ Регион не найден</div>';
+        return;
     }
+    
+    filtered.forEach(regionName => {
+        const div = document.createElement('div');
+        div.className = "region-list-item";
+        div.innerHTML = `<span class="region-name">${regionName}</span>`;
+        
+        div.onclick = (function(name) {
+            return function() {
+                // Получаем координаты региона
+                const coords = getCoords(name);
+                
+                // Плавно перемещаем карту к региону (уровень зума 6-7)
+                map.setView(coords, 6);
+                
+                // Создаём временный маркер с информацией
+                const tempMarker = L.marker(coords).addTo(map);
+                
+                // Формируем путь к файлу региона
+                const fileName = getFileName(name);
+                const fullPath = 'region/' + fileName;
+                
+                // Показываем попап с информацией и кнопкой
+                tempMarker.bindPopup(`
+                    <div style="text-align:center">
+                        <strong>${name}</strong><br>
+                        <button class="region-button" onclick="window.location.href='${fullPath}'">🌍 Перейти на сайт региона</button>
+                        <br><small style="color:#666;">Нажмите на карту, чтобы закрыть</small>
+                    </div>
+                `).openPopup();
+                
+                // Автоматически скрываем маркер через 5 секунд
+                setTimeout(() => map.removeLayer(tempMarker), 5000);
+                
+                // Подсвечиваем активный элемент в списке
+                document.querySelectorAll('.region-list-item').forEach(el => el.classList.remove('active'));
+                div.classList.add('active');
+            };
+        })(regionName);
+        
+        regionListDiv.appendChild(div);
+    });
+}
 
     map = L.map('map', { attributionControl: false }).setView([62, 95], 4);
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {

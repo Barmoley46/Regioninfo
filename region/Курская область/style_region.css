@@ -185,6 +185,7 @@ body {
     padding: 0 4px;
     font-weight: 600;
 }
+
 @media (max-width: 1024px) {
     .welcome-banner {
         padding: 15px 20px;
@@ -244,4 +245,18 @@ body {
     .text-content p {
         font-size: 0.9rem;
     }
+}
+.content-block.centered-slider .image-slider {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-block.centered-slider .slider-container {
+    margin: 0 auto;
+}
+
+.content-block.centered-slider .slider-controls {
+    justify-content: center;
 }

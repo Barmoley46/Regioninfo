@@ -100,16 +100,40 @@
                 <p>Богата история античного периода: на территории края находились древнегреческие колонии, такие как <strong>Горгиппия</strong> (современная Анапа) и <strong>Фанагория</strong> на Таманском полуострове. В Новороссийске находится легендарный мемориал <strong>"Малая земля"</strong> — памятник героической обороне города в годы Великой Отечественной войны. Сегодня Краснодарский край — это центр проведения крупнейших культурных и спортивных событий, включая Международный фестиваль "Кинотавр" в Сочи, что делает регион важнейшим культурным центром юга России.</p>
             </div>
         </div>
+        <div class="content-block">
+            <div class="image-slider left-slider">
+                <div class="slider-container">
+                    <img src="../region/Краснодраский Край/kraskray16.jpg" alt="Кубанский борщ" class="slider-image active" id="slider5-img1">
+                    <img src="../region/Краснодраский Край/kraskray17.webp" alt="Вареники с вишней" class="slider-image" id="slider5-img2">
+                    <img src="../region/Краснодраский Край/kraskray18.jpg" alt="Кубанское сало с хреном" class="slider-image" id="slider5-img3">
+                    <img src="../region/Краснодраский Край/kraskray19.webp"alt="Уха по-кубански" class="slider-image" id="slider5-img4">
+                    <img src="../region/Краснодраский Край/kraskray20.jpg"" alt="Кубанский узвар" class="slider-image" id="slider5-img5">
+                </div>
+                <div class="slider-controls">
+                    <button class="slider-btn prev" onclick="changeImage('left3', -1)">❮</button>
+                    <span class="slider-counter" id="left3-counter">1/5</span>
+                    <button class="slider-btn next" onclick="changeImage('left3', 1)">❯</button>
+                </div>
+            </div>
+            <div class="text-content right-text">
+                <h2>Кулинарные традиции Краснодарского края</h2>
+                <p>Кубанская кухня сформировалась под влиянием казачьих традиций, соседства народов Кавказа и богатства чернозёмной природы. Главное блюдо — <strong>кубанский борщ</strong>. Его варят на свином или говяжьем бульоне, обязательно добавляют фасоль, а подают с пампушками, чесноком и сметаной. На Кубани принято «заправлять» борщ свекольным квасом для кислинки. Из первых блюд также популярна <strong>уха по-кубански</strong> — наваристый суп из местной рыбы (сазан, судак, тарань) с помидорами и зеленью.</p>
+                <p>Кубань — житница России, поэтому здесь любят выпечку и блюда из муки. <strong>Вареники</strong> — с вишней, творогом, картошкой, капустой, смазанные маслом и политые сметаной. <strong>Пампушки</strong> — небольшие булочки с чесночно-укропной заправкой, которые подают к борщу. <strong>Кубанские пироги</strong> с калиной, вишней, яблоками или творогом — обязательное угощение. Казаки готовили <strong>жульены из грибов</strong> и <strong>кашу «кулеш»</strong> на сале с пшеном и картошкой.</p>
+                <p>Традиционные закуски: <strong>сало с хреном и чёрным перцем</strong>, солёные и маринованные помидоры, огурцы, арбузы. Из мяса — <strong>шашлык по-адыгейски</strong> с кисломолочным маринадом, <strong>жаркое с черносливом</strong>. Среди молочных блюд — <strong>брынза</strong>, <strong>адыгейский сыр</strong>. Напитки: <strong>кубанский узвар</strong> из сухофруктов и шиповника, компот из местных яблок и груш, <strong>кисель молочный</strong>. Всё это — кубанское гостеприимство, щедрость земли и уважение к традициям.</p>
+            </div>
+        </div>
     </div>
 
     <script>
-        // Состояние слайдеров
-        const sliders = {
+ // Состояние слайдеров
+         const sliders = {
             left: { current: 0, total: 3 },
             right: { current: 0, total: 4 },
             left2: { current: 0, total: 5 },
-            right2: { current: 0, total: 3 }
+            right2: { current: 0, total: 3 },
+            left3: { current: 0, total: 5 }  
         };
+        
 
         // Функция возврата на предыдущую страницу
         function goBack() {
@@ -142,15 +166,16 @@
             }
         }
 
-        function getSliderNumber(sliderId) {
-            const map = {
-                'left': '1',
-                'right': '2',
-                'left2': '3',
-                'right2': '4'
-            };
-            return map[sliderId] || '1';
-        }
+       function getSliderNumber(sliderId) {
+    const map = {
+        'left': '1',
+        'right': '2',
+        'left2': '3',
+        'right2': '4',
+        'left3': '5'
+    };
+    return map[sliderId] || '1';
+}
     </script>
 </body>
 </html>
